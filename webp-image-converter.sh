@@ -57,7 +57,7 @@ while IFS= read -r file; do
 
     echo "Converted file: $filename"
 done < <(find "$source_directory" -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" \) \
-        | grep -vE "_site|sites|campaign-landing-pages|pr-campaigns|\.sh$")
+        | grep -vE "node_modules|build|apache|.idea|.husky|vendor|.git|package.json|*.yaml|*.yml|\.env$|\.env.sample|\.json$|assets|public|.vscode|\.sh$")
 
 # Initialize a counter for the converted files
 converted_count=0
