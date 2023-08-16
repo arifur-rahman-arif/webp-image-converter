@@ -50,7 +50,11 @@ while IFS= read -r file; do
     replace_text="$filename_without_extension.webp"
 
     # Find and replace references in files
-    find "$target_directory" -type f -exec sed -i "s/$filename_without_extension.$extension/$replace_text/g" {} +
+find "$target_directory" \
+    -type d \( -name "node_modules" -o -name "build" -o -name "apache" -o -name ".idea" -o -name ".husky" -o -name "vendor" -o -name ".git" -o -name ".vscode" \) -prune \
+    -o -type f \( -name "package.json" -o -name "*.yaml" -o -name "*.yml" -o -name ".env" -o -name ".env.sample" -o -name "*.json" -o -name "*.sh" \) -prune \
+    -o -type f -exec sed -i "s/$filename_without_extension.$extension/$replace_text/g" {} +
+
 
     # Add the file to the array
     files_to_process+=("$file")
